@@ -118,4 +118,235 @@
     /* Section label */
     .section-label {
       font-size: 9px;
-      letter-
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      align-self: flex-start;
+      margin-bottom: 10px;
+      margin-top: 32px;
+      padding-left: 2px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    /* Links */
+    .links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 16px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+      opacity: 0;
+      animation: fadeUp 0.5s ease forwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: transform 0.25s ease;
+      transform-origin: bottom;
+    }
+
+    .link-card:hover {
+      border-color: var(--accent-dim);
+      background: #f9f7f2;
+      transform: translateX(3px);
+    }
+
+    .link-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .link-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .link-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 15px;
+      transition: border-color 0.25s ease;
+    }
+
+    .link-card:hover .link-icon {
+      border-color: var(--accent-dim);
+    }
+
+    .link-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .link-title {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .link-handle {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .link-arrow {
+      color: var(--text-muted);
+      font-size: 14px;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+
+    .link-card:hover .link-arrow {
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    /* Badge for affiliate */
+    .badge {
+      font-size: 8px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent-dim);
+      border-radius: 2px;
+      padding: 2px 5px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 48px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 1s forwards;
+    }
+
+    .footer p {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Staggered delays */
+    .header         { animation-delay: 0.1s; }
+    .section-label:nth-of-type(1) { animation-delay: 0.3s; }
+    .link-card:nth-child(1) { animation-delay: 0.35s; }
+    .link-card:nth-child(2) { animation-delay: 0.45s; }
+    .section-label.s2 { animation-delay: 0.55s; }
+    .link-card.d1   { animation-delay: 0.6s; }
+    .link-card.d2   { animation-delay: 0.7s; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="monogram"><span>TTC</span></div>
+      <h1 class="name">ThatTennisCouple</h1>
+      <p class="tagline">Tennis · Travel · Community</p>
+      <div class="divider"></div>
+    </div>
+
+    <!-- Follow Us -->
+    <span class="section-label">Follow Us</span>
+    <div class="links">
+      <a href="https://www.instagram.com/thattenniscouple" target="_blank" rel="noopener" class="link-card">
+        <div class="link-left">
+          <div class="link-icon">📸</div>
+          <div class="link-info">
+            <span class="link-title">Instagram</span>
+            <span class="link-handle">@ThatTennisCouple</span>
+          </div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <a href="https://www.tiktok.com/@thattenniscouple" target="_blank" rel="noopener" class="link-card">
+        <div class="link-left">
+          <div class="link-icon">📱</div>
+          <div class="link-info">
+            <span class="link-title">TikTok</span>
+            <span class="link-handle">@ThatTennisCouple</span>
+          </div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- Shop Our Picks -->
+    <span class="section-label s2">Shop Our Picks</span>
+    <div class="links">
+      <!-- 1. Cancha Bags -->
+      <a href="https://canchagear.com/?bg_ref=5WT7SLUYbv" target="_blank" rel="noopener" class="link-card d1">
+        <div class="link-left">
+          <div class="link-icon">🎾</div>
+          <div class="link-info">
+            <span class="link-title">Cancha Bags <span class="badge">Partner</span></span>
+            <span class="link-handle">Use our link · 10% off for you</span>
+          </div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+
+      <!-- 2. SwingVision -->
+      <a href="https://swing.vision/r/thattenniscouple" target="_blank" rel="noopener" class="link-card d2">
+        <div class="link-left">
+          <div class="link-icon">🎥</div>
+          <div class="link-info">
+            <span class="link-title">SwingVision <span class="badge">Affiliate</span></span>
+            <span class="link-handle">AI match tracking & line calling</span>
+          </div>
+        </div>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>Links may be affiliate links</p>
+      <p>We appreciate your support</p>
+    </div>
+
+  </div>
+</body>
+</html>
