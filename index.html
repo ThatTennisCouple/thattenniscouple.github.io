@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,6 +15,21 @@
       --text: #1a1a16;
       --text-muted: #7a7060;
       --text-sub: #5a5040;
+      --toggle-bg: #e0dbd0;
+      --toggle-knob: #8a6e2f;
+    }
+
+    [data-theme="dark"] {
+      --bg: #121210;
+      --surface: #1e1e1a;
+      --border: #2e2e28;
+      --accent: #c9a84c;
+      --accent-dim: #8a6e2f;
+      --text: #f0ece0;
+      --text-muted: #8a8070;
+      --text-sub: #a09080;
+      --toggle-bg: #2e2e28;
+      --toggle-knob: #c9a84c;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,9 +44,9 @@
       justify-content: center;
       padding: 40px 20px;
       overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    /* Subtle background texture */
     body::before {
       content: '';
       position: fixed;
@@ -54,12 +69,69 @@
       gap: 0;
     }
 
-    /* Header */
+    .theme-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.1s forwards;
+    }
+
+    .toggle-label {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .toggle-track {
+      width: 36px;
+      height: 20px;
+      border-radius: 10px;
+      background: var(--toggle-bg);
+      position: relative;
+      transition: background 0.3s ease;
+      border: 1px solid var(--border);
+    }
+
+    .toggle-knob {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--toggle-knob);
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    [data-theme="dark"] .toggle-knob {
+      transform: translateX(16px);
+    }
+
     .header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 32px;
+      margin-top: 20px;
       opacity: 0;
-      animation: fadeUp 0.8s ease forwards;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+      width: 100%;
+    }
+
+    .hero-photo {
+      width: 100%;
+      max-width: 340px;
+      height: 220px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 8px;
+      margin: 0 auto 24px;
+      display: block;
+      border: 1px solid var(--border);
     }
 
     .monogram {
@@ -108,6 +180,14 @@
       text-transform: uppercase;
     }
 
+    .bio {
+      font-size: 11px;
+      color: var(--text-sub);
+      letter-spacing: 0.5px;
+      margin-top: 10px;
+      line-height: 1.6;
+    }
+
     .divider {
       width: 40px;
       height: 1px;
@@ -115,7 +195,6 @@
       margin: 16px auto 0;
     }
 
-    /* Section label */
     .section-label {
       font-size: 9px;
       letter-spacing: 3px;
@@ -129,7 +208,6 @@
       animation: fadeUp 0.6s ease forwards;
     }
 
-    /* Links */
     .links {
       width: 100%;
       display: flex;
@@ -170,7 +248,7 @@
 
     .link-card:hover {
       border-color: var(--accent-dim);
-      background: #f9f7f2;
+      background: var(--bg);
       transform: translateX(3px);
     }
 
@@ -193,8 +271,13 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      font-size: 15px;
       transition: border-color 0.25s ease;
+      background: var(--surface);
+    }
+
+    .link-icon svg {
+      width: 18px;
+      height: 18px;
     }
 
     .link-card:hover .link-icon {
@@ -232,7 +315,6 @@
       transform: translateX(3px);
     }
 
-    /* Badge for affiliate */
     .badge {
       font-size: 8px;
       letter-spacing: 2px;
@@ -245,12 +327,59 @@
       vertical-align: middle;
     }
 
-    /* Footer */
+    .signup-section {
+      width: 100%;
+      margin-top: 32px;
+      opacity: 0;
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    .signup-box {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 24px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .signup-box::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent);
+    }
+
+    .signup-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+    }
+
+    .signup-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .signup-embed {
+      width: 100%;
+    }
+
     .footer {
       margin-top: 48px;
       text-align: center;
       opacity: 0;
-      animation: fadeUp 0.6s ease 1s forwards;
+      animation: fadeUp 0.6s ease 1.2s forwards;
     }
 
     .footer p {
@@ -260,39 +389,55 @@
       color: var(--text-muted);
     }
 
-    /* Animations */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* Staggered delays */
-    .header         { animation-delay: 0.1s; }
-    .section-label:nth-of-type(1) { animation-delay: 0.3s; }
-    .link-card.d1   { animation-delay: 0.35s; }
-    .link-card.d2   { animation-delay: 0.45s; }
-    .section-label.s2 { animation-delay: 0.55s; }
-    .link-card.f1   { animation-delay: 0.6s; }
-    .link-card.f2   { animation-delay: 0.7s; }
+    .section-label:nth-of-type(1) { animation-delay: 0.35s; }
+    .link-card.d1 { animation-delay: 0.4s; }
+    .link-card.d2 { animation-delay: 0.5s; }
+    .section-label.s2 { animation-delay: 0.6s; }
+    .link-card.f1 { animation-delay: 0.65s; }
+    .link-card.f2 { animation-delay: 0.75s; }
+    .signup-section { animation-delay: 0.85s; }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <!-- Header -->
+    <div class="theme-toggle" onclick="toggleTheme()" role="button" aria-label="Toggle dark mode">
+      <span class="toggle-label" id="toggle-label">Dark</span>
+      <div class="toggle-track">
+        <div class="toggle-knob"></div>
+      </div>
+    </div>
+
     <div class="header">
+      <img
+        src="hero.jpg"
+        alt="Kevin and Sierra on the tennis court at sunset"
+        class="hero-photo"
+        onerror="this.style.display='none'"
+      />
       <div class="monogram"><span>TTC</span></div>
       <h1 class="name">ThatTennisCouple</h1>
       <p class="tagline">Tennis · Travel · Community</p>
+      <p class="bio">Kevin & Sierra · NYC tennis players sharing the game we love</p>
       <div class="divider"></div>
     </div>
 
-    <!-- Shop Our Picks -->
     <span class="section-label">Shop Our Picks</span>
     <div class="links">
       <a href="https://canchagear.com/?bg_ref=5WT7SLUYbv" target="_blank" rel="noopener" class="link-card d1">
         <div class="link-left">
-          <div class="link-icon">🎾</div>
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)">
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 01-8 0"/>
+            </svg>
+          </div>
           <div class="link-info">
             <span class="link-title">Cancha Bags <span class="badge">Partner</span></span>
             <span class="link-handle">Use our link · 10% off for you</span>
@@ -303,7 +448,12 @@
 
       <a href="https://swing.vision/r/thattenniscouple" target="_blank" rel="noopener" class="link-card d2">
         <div class="link-left">
-          <div class="link-icon">🎥</div>
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)">
+              <polygon points="23 7 16 12 23 17 23 7"/>
+              <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+            </svg>
+          </div>
           <div class="link-info">
             <span class="link-title">SwingVision <span class="badge">Affiliate</span></span>
             <span class="link-handle">AI match tracking & line calling</span>
@@ -313,12 +463,17 @@
       </a>
     </div>
 
-    <!-- Follow Us -->
     <span class="section-label s2">Follow Us</span>
     <div class="links">
       <a href="https://www.instagram.com/thattenniscouple" target="_blank" rel="noopener" class="link-card f1">
         <div class="link-left">
-          <div class="link-icon">📸</div>
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+            </svg>
+          </div>
           <div class="link-info">
             <span class="link-title">Instagram</span>
             <span class="link-handle">@ThatTennisCouple</span>
@@ -329,7 +484,11 @@
 
       <a href="https://www.tiktok.com/@thattenniscouple" target="_blank" rel="noopener" class="link-card f2">
         <div class="link-left">
-          <div class="link-icon">📱</div>
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+              <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/>
+            </svg>
+          </div>
           <div class="link-info">
             <span class="link-title">TikTok</span>
             <span class="link-handle">@ThatTennisCouple</span>
@@ -339,12 +498,36 @@
       </a>
     </div>
 
-    <!-- Footer -->
+    <div class="signup-section">
+      <div class="signup-box">
+        <div class="signup-title">Where tennis couples connect</div>
+        <p class="signup-sub">Join a growing community of couples who play together — mixers, court sessions, and events in NYC all year long.</p>
+        <div class="signup-embed">
+          <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="4fab594f-44c5-4080-b470-d40345bc7c3d"></script>
+          <script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
+        </div>
+      </div>
+    </div>
+
     <div class="footer">
       <p>Links may be affiliate links</p>
       <p>We appreciate your support</p>
     </div>
 
   </div>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const label = document.getElementById('toggle-label');
+      if (html.getAttribute('data-theme') === 'light') {
+        html.setAttribute('data-theme', 'dark');
+        label.textContent = 'Light';
+      } else {
+        html.setAttribute('data-theme', 'light');
+        label.textContent = 'Dark';
+      }
+    }
+  </script>
 </body>
 </html>
